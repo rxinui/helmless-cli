@@ -4,6 +4,14 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// Knative object type manipulable by Helmless
+type GCRType int
+
+const (
+	GCRService GCRType = iota // Service
+	GCRJob                    // Job
+)
+
 // NewRootCmd creates a new root command
 func NewRootCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -12,7 +20,7 @@ func NewRootCmd() *cobra.Command {
 	}
 
 	cmd.AddCommand(newCreateCmd())
-
+	cmd.AddCommand(newMigrateCmd())
 	return cmd
 }
 
